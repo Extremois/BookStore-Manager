@@ -50,4 +50,23 @@ public class BookService {
 
         return bookRepository.findById(id);
     }
+
+    public Book updateBook(Long id, RequestBookDto requestBookDto) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Livro não encontrado"));
+
+        if (!requestBookDto.isbn().equals(book.getIsbn())) {
+            if (bookRepository.existsByIsbn(requestBookDto.isbn())) {
+                throw new BookExisteException("Já Existe um Livro com esse ISBN");
+            }
+        }
+
+        if (requestBookDto.anoPublicacao() > 2025) {
+            throw new BookExisteException("Ano inválido");
+        }
+
+        BeanUtils.copyProperties(requestBookDto, book);
+
+        return bookRepository.save(book);
+    }
 }

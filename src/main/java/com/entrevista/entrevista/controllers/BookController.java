@@ -26,4 +26,14 @@ public class BookController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+
+    @GetMapping
+    public ResponseEntity<List<ResponseBookDto>> findAll(){
+        var listbook = bookService.getall();
+
+        var response = listbook.stream().map(ResponseBookDto::fromEntity).toList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

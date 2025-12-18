@@ -23,7 +23,7 @@ public class BookService {
             throw new BookExisteException("Já Existe um Livro com esse ISBN");
         }
         if (requestBookDto.anoPublicacao() > 2025){
-            throw new RuntimeException("Ano Invalido");
+            throw new BookExisteException("Ano Invalido");
         }
 
         Book book = new Book();
@@ -31,5 +31,18 @@ public class BookService {
         BeanUtils.copyProperties(requestBookDto,book);
 
         return bookRepository.save(book);
+    }
+
+    public List<Book> getall(){
+
+        if (bookRepository.findAll().isEmpty()) {
+            throw new BookExisteException("Nenhum Livro encontrado");
+        }
+
+        return bookRepository.findAll();
+    }
+
+    public Optional<Book> findbyid(Long id){
+        return bookRepository.findById(id);
     }
 }

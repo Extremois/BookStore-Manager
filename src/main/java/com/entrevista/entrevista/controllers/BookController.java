@@ -3,6 +3,7 @@ package com.entrevista.entrevista.controllers;
 import com.entrevista.entrevista.dtos.request.RequestBookDto;
 import com.entrevista.entrevista.dtos.response.ResponseBookDto;
 import com.entrevista.entrevista.services.BookService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class BookController {
     public BookController(BookService bookService) {this.bookService = bookService;}
 
     @PostMapping
-    public ResponseEntity<ResponseBookDto> save(@RequestBody RequestBookDto requestBookDto) {
+    public ResponseEntity<ResponseBookDto> save(@Valid @RequestBody RequestBookDto requestBookDto) {
 
         var book = bookService.createBook(requestBookDto);
 
@@ -47,7 +48,7 @@ public class BookController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ResponseBookDto> update(@PathVariable Long id,
-                                                  @RequestBody RequestBookDto requestBookDto) {
+                                                  @Valid @RequestBody RequestBookDto requestBookDto) {
         var book = bookService.updateBook(id, requestBookDto);
 
         var response = ResponseBookDto.fromEntity(book);
@@ -55,4 +56,10 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseBookDto> delete(@PathVariable Long id){
+        bookService.deleteBookById(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

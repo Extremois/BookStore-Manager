@@ -69,4 +69,15 @@ public class BookService {
 
         return bookRepository.save(book);
     }
+
+    public void deleteBookById(Long id){
+        var BookEntity = bookRepository.findById(id);
+
+        if (BookEntity.isPresent()){
+            bookRepository.deleteById(id);
+        }
+        else {
+            throw new BookNotFoundException("Livro não encontrado");
+        }
+    }
 }

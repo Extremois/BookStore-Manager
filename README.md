@@ -1,34 +1,17 @@
-📚 Projeto — Spring Boot
-🛠️ Tecnologias Utilizadas
-🔹 Framework
+# Projeto — Spring Boot
 
-Spring Boot 3.5.8
+## Tecnologias
 
-🔹 Banco de Dados
+- **Java:** 21  
+- **Framework:** Spring Boot 3.5.8  
+- **Banco de Dados:** MySQL  
+- **Build Tool:** Maven  
 
-MySQL
-(utilizado pela familiaridade)
+## Dependências
 
-🔹 Build Tool
-
-Maven
-
-📦 Dependências
-
-Spring Data JPA
-Persistência de dados com JPA e Hibernate
-
-Spring Web
-Criação de APIs REST
-
-Lombok
-Redução de código boilerplate
-
-MySQL Driver
-Conexão com banco de dados MySQL
-
-Spring Boot Validation
-Validações com Bean Validation (Hibernate Validator)
-
-Docker Compose Support
-Suporte para orquestração de containers com Docker
+- Spring Data JPA  
+- Spring Web  
+- Lombok  
+- MySQL Driver  
+- Spring Boot Validation  
+- Docker Compose Support  

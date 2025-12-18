@@ -16,4 +16,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(Map.of("erro", ex.getMessage()));
     }
+
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleLivroNaoExiste(BookNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Map.of("erro", ex.getMessage()));
+    }
 }

@@ -3,6 +3,7 @@ package com.entrevista.entrevista.services;
 import com.entrevista.entrevista.dtos.request.RequestBookDto;
 import com.entrevista.entrevista.entity.Book;
 import com.entrevista.entrevista.exception.BookExisteException;
+import com.entrevista.entrevista.exception.BookNotFoundException;
 import com.entrevista.entrevista.repositories.BookRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,10 @@ public class BookService {
     }
 
     public Optional<Book> findbyid(Long id){
+        if (bookRepository.findById(id).isEmpty()) {
+            throw new BookNotFoundException("Livro com esse ID não encontrado");
+        }
+
         return bookRepository.findById(id);
     }
 }
